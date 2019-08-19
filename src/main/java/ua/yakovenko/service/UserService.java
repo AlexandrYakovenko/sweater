@@ -1,5 +1,6 @@
 package ua.yakovenko.service;
 
+import lombok.Getter;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -12,6 +13,7 @@ import java.util.Collections;
 
 @Service
 public class UserService implements UserDetailsService {
+    @Getter
     private final UserRepo userRepo;
 
     public UserService(UserRepo userRepo) {

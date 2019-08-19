@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import ua.yakovenko.domain.Role;
 import ua.yakovenko.domain.User;
 import ua.yakovenko.repo.UserRepo;
+import ua.yakovenko.service.UserService;
 
 import java.util.Arrays;
 import java.util.Map;
@@ -19,11 +20,11 @@ import java.util.stream.Collectors;
 @PreAuthorize("hasAuthority('ADMIN')")
 public class UserController {
     @Autowired
-    private UserRepo userRepo;
+    private UserService userService;
 
     @GetMapping
     public String userList(Model model) {
-        model.addAttribute("users", userRepo.findAll());
+        model.addAttribute("users", userService.getUserRepo().findAll());
         return "userList";
     }
 
@@ -54,7 +55,7 @@ public class UserController {
             }
         }
 
-        userRepo.save(user);
+        userService.getUserRepo().save(user);
 
         return "redirect:/user";
     }
