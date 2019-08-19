@@ -15,9 +15,15 @@
     </parent>
 
     <dependencies>
+        <!-- standard dependency -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-starter-devtools</artifactId>
+            <optional>true</optional>
         </dependency>
 
         <!-- Шаблонизаторы -->
@@ -30,12 +36,7 @@
             <artifactId>spring-boot-starter-freemarker</artifactId>
         </dependency>
 
-        <!-- -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-starter-devtools</artifactId>
-            <optional>true</optional>
-        </dependency>
+        <!-- BD -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
@@ -51,7 +52,6 @@
             <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
 
-
         <!-- Lombok -->
         <dependency>
             <groupId>org.projectlombok</groupId>
@@ -59,15 +59,6 @@
             <optional>true</optional>
             <scope>provided</scope>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-entitymanager -->
-        <!--<dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-entitymanager</artifactId>
-            <version>5.4.4.Final</version>
-        </dependency>
--->
-
-
     </dependencies>
 
     <properties>
