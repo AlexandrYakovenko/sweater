@@ -2,6 +2,8 @@ package ua.yakovenko.controller;
 
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import ua.yakovenko.domain.Message;
 import ua.yakovenko.domain.User;
 import ua.yakovenko.repo.MessageRepo;
@@ -11,7 +13,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.validation.Valid;
 import java.util.Map;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 @Controller
 public class MainController {
@@ -42,16 +47,23 @@ public class MainController {
     @PostMapping("/main")
     public String add(
             @AuthenticationPrincipal User user,
-            @RequestParam String text,
-            @RequestParam String tag,
-            Map<String, Object> model) {
-        Message message = new Message(text, tag, user);
+            @Valid Message message,
+            BindingResult bindingResult,
+            Model model) {
+        message.setAuthor(user);
 
-        messageRepo.save(message);
+        if (bindingResult.hasErrors()) {
+            Map<String, String> errorsMap = ControllerUtils.getErrors(bindingResult);
+            model.mergeAttributes(errorsMap);
+            model.addAttribute("message", message);
+        } else {
+            model.addAttribute("message", null);
+            messageRepo.save(message);
+        }
 
         Iterable<Message> messages = messageRepo.findAll();
 
-        model.put("messages", messages);
+        model.addAttribute("messages", messages);
 
         return "main";
     }
