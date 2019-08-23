@@ -24,6 +24,7 @@ public class UserController {
 
     @GetMapping
     public String userList(Model model) {
+        //TODO method in userService
         model.addAttribute("users", userService.getUserRepo().findAll());
         return "userList";
     }
