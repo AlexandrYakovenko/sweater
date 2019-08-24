@@ -33,7 +33,7 @@ public class RegistrationController {
         if (bindingResult.hasErrors()){
             Map<String, String> errors = ControllerUtils.getErrors(bindingResult);
 
-            model.addAttribute(errors);
+            model.addAllAttributes(errors);
             return "registration";
         }
         
